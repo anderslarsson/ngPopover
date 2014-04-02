@@ -1,6 +1,6 @@
-var module = angular.module('rrPopover', []);
+var module = angular.module('ngPopover', []);
 
-module.provider('rrPopover', function () {
+module.provider('ngPopover', function () {
 
 	var open = false;
 
@@ -160,12 +160,12 @@ module.provider('rrPopover', function () {
 	}
 });
 
-module.directive('rrPopover', function($templateCache, $compile, rrPopover) {
+module.directive('ngPopover', function($templateCache, $compile, ngPopover) {
 
 	return {
-		restrict: 'C', 
+		restrict: 'A', 
 		link: function(scope, element, attrs) {
-			rrPopover.popover(element, scope, attrs);
+			ngPopover.popover(element, scope, attrs);
 		}
 	}
 
