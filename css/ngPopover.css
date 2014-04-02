@@ -1,0 +1,124 @@
+#rr-popover {
+  z-index: 10000;
+  background-color: #fff;
+  -webkit-box-shadow: -3px 5px 12px 0 rgba(0,0,0,0.1);
+  box-shadow: -3px 5px 12px 0 rgba(0,0,0,0.1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.25);
+  border-radius: 5px;
+}
+#rr-popover .title {
+  padding: 10px 30px 10px 10px;
+  background-color: #eee;
+}
+#rr-popover .title h1,
+#rr-popover .title h2,
+#rr-popover .title h3,
+#rr-popover .title h4 {
+  margin: 0;
+}
+#rr-popover .close-pop {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-decoration: none;
+  color: #000;
+}
+#rr-popover .close-pop:hover {
+  color: #999;
+}
+#rr-popover .content {
+  padding: 10px;
+}
+#rr-popover.top {
+  margin-top: -10px;
+}
+#rr-popover.right {
+  margin-left: 10px;
+}
+#rr-popover.bottom {
+  margin-top: 10px;
+}
+#rr-popover.left {
+  margin-left: -10px;
+}
+#rr-popover .arrow,
+#rr-popover .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+#rr-popover .arrow {
+  border-width: 11px;
+}
+#rr-popover .arrow:after {
+  border-width: 10px;
+  content: "";
+}
+#rr-popover.top .arrow {
+  left: 50%;
+  margin-left: -11px;
+  border-bottom-width: 0;
+  border-top-color: #ccc;
+  border-top-color: rgba(0,0,0,0.25);
+  bottom: -11px;
+}
+#rr-popover.top .arrow:after {
+  content: " ";
+  bottom: 1px;
+  margin-left: -rr-popover-arrow-width;
+  border-bottom-width: 0;
+  border-top-color: #fff;
+}
+#rr-popover.right .arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-left-width: 0;
+  border-right-color: #ccc;
+  border-right-color: rgba(0,0,0,0.25);
+}
+#rr-popover.right .arrow:after {
+  content: " ";
+  left: 1px;
+  bottom: -10px;
+  border-left-width: 0;
+  border-right-color: #fff;
+}
+#rr-popover.bottom .arrow {
+  left: 50%;
+  margin-left: -11px;
+  border-top-width: 0;
+  border-bottom-color: #ccc;
+  border-bottom-color: rgba(0,0,0,0.25);
+  top: -11px;
+}
+#rr-popover.bottom .arrow:after {
+  content: " ";
+  top: 1px;
+  margin-left: -10px;
+  border-top-width: 0;
+  border-bottom-color: #eee;
+}
+#rr-popover.left .arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-right-width: 0;
+  border-left-color: #ccc;
+  border-left-color: rgba(0,0,0,0.25);
+}
+#rr-popover.left .arrow:after {
+  content: " ";
+  right: 1px;
+  border-right-width: 0;
+  border-left-color: #fff;
+  bottom: -10px;
+}

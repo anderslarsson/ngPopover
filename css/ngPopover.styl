@@ -1,0 +1,138 @@
+// RR popover
+
+//Variables
+rr-popover-bg-color = #fff
+rr-popover-title-bg-color = #eee
+rr-popover-arrow-color = rr-popover-bg-color 
+rr-popover-border-color = rgba(0,0,0,0.25)
+rr-popover-fallback-border-color = #ccc
+rr-popover-arrow-outer-color = rr-popover-border-color
+rr-popover-arrow-outer-fallback-color = rr-popover-fallback-border-color
+rr-popover-arrow-width = 10px
+rr-popover-arrow-outer-width = (rr-popover-arrow-width + 1)
+
+#rr-popover
+	// Some default width and height and position help
+	//width: 250px
+	//height: 300px
+	z-index 10000
+	background-color white
+	-webkit-box-shadow: -3px 5px 12px 0 rgba(0,0,0,0.1)
+	box-shadow: -3px 5px 12px 0 rgba(0,0,0,0.1)
+
+	// Here we go!
+	position: absolute
+	top: 0
+	left: 0
+	display: none
+	background-color: rr-popover-bg-color
+	border: 1px solid rr-popover-border-color
+	border-radius: 5px
+
+	.title
+		padding: 10px 30px 10px 10px
+		background-color rr-popover-title-bg-color
+
+		h1,h2,h3,h4
+			margin: 0
+
+	.close-pop
+		position: absolute
+		top: 10px
+		right: 10px
+		text-decoration: none
+		color: #000
+
+		&:hover
+			color: #999
+
+	.content
+		padding: 10px
+
+	// Give room for the arrow
+	&.top
+		margin-top: - rr-popover-arrow-width
+	
+	&.right
+		margin-left: rr-popover-arrow-width
+	
+	&.bottom
+		margin-top: rr-popover-arrow-width
+
+	&.left
+		margin-left: - rr-popover-arrow-width
+
+	.arrow
+
+		&, &:after
+			position: absolute
+			display: block
+			width: 0
+			height: 0
+			border-color: transparent
+			border-style: solid	
+		&
+			border-width: rr-popover-arrow-outer-width
+		&:after 
+			border-width: rr-popover-arrow-width
+			content: ""
+
+
+	// Place arrow
+	&.top .arrow
+		left: 50%
+		margin-left: - rr-popover-arrow-outer-width
+		border-bottom-width: 0
+		border-top-color: rr-popover-arrow-outer-fallback-color // IE8 fallback
+		border-top-color: rr-popover-arrow-outer-color
+		bottom: - rr-popover-arrow-outer-width
+		&:after
+			content: " "
+			bottom: 1px
+			margin-left: -rr-popover-arrow-width
+			border-bottom-width: 0
+			border-top-color: rr-popover-arrow-color
+
+	&.right .arrow
+		top: 50%
+		left: - rr-popover-arrow-outer-width
+		margin-top: - rr-popover-arrow-outer-width
+		border-left-width: 0
+		border-right-color: rr-popover-arrow-outer-fallback-color // IE8 fallback
+		border-right-color: rr-popover-arrow-outer-color
+		&:after
+			content: " "
+			left: 1px
+			bottom: - rr-popover-arrow-width
+			border-left-width: 0
+			border-right-color: rr-popover-arrow-color
+
+	&.bottom .arrow 
+		left: 50%
+		margin-left: - rr-popover-arrow-outer-width
+		border-top-width: 0
+		border-bottom-color: rr-popover-arrow-outer-fallback-color // IE8 fallback
+		border-bottom-color: rr-popover-arrow-outer-color
+		top: - rr-popover-arrow-outer-width
+		&:after 
+			content: " "
+			top: 1px
+			margin-left: - rr-popover-arrow-width
+			border-top-width: 0
+			border-bottom-color: rr-popover-title-bg-color
+
+	&.left .arrow 
+		top: 50%
+		right: - rr-popover-arrow-outer-width
+		margin-top: - rr-popover-arrow-outer-width
+		border-right-width: 0
+		border-left-color: rr-popover-arrow-outer-fallback-color // IE8 fallback
+		border-left-color: rr-popover-arrow-outer-color
+		&:after 
+			content: " "
+			right: 1px
+			border-right-width: 0
+			border-left-color: rr-popover-arrow-color
+			bottom: - rr-popover-arrow-width
+
+
