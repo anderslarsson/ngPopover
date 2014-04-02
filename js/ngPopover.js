@@ -160,6 +160,7 @@ module.provider('ngPopover', function () {
 	}
 });
 
+
 module.directive('ngPopover', function($templateCache, $compile, ngPopover) {
 
 	return {
