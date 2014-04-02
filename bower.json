@@ -1,0 +1,28 @@
+{
+  "name": "ngPopover",
+  "version": "0.0.1",
+  "homepage": "https://github.com/anderslarsson/ngPopover",
+  "authors": [
+    "anderslarsson <anders.larsson.funkis@gmail.com>"
+  ],
+  "description": "css framwork independent popover imlementation for angular.js",
+  "keywords": [
+    "popover",
+    "angularjs"
+  ],
+  "main": [
+      "js/ngPopover.js",
+      "css/ngPopover.css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ], 
+  "dependencies": {
+    "angular": "~1"
+  }  
+}
