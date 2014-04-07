@@ -175,7 +175,7 @@ module.directive('ngPopover', function($templateCache, $compile, ngPopover) {
 	return {
 		restrict: 'A', 
 		link: function(scope, element, attrs) {
-			ngPopover.popover(element, scope, attrs);
+			ngPopover.open(element, scope, attrs);
 		}
 	}
 
