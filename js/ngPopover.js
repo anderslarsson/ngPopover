@@ -9,8 +9,8 @@ module.provider('ngPopover', function () {
 		var elementPosition = $(element).offset();
 		var elementWidth = $(element).outerWidth();
 		var elementHeight = $(element).outerHeight();
-		var popoverWidth = $('#rr-popover').outerWidth();
-		var popoverHeight = $('#rr-popover').outerHeight();
+		var popoverWidth = $('#ng-popover').outerWidth();
+		var popoverHeight = $('#ng-popover').outerHeight();
 		var windowWidth = $(window).width();
 
 		var win = $(window);
@@ -55,7 +55,7 @@ module.provider('ngPopover', function () {
 				adjustedTop = Math.min(pos.top, pos.top + popoverHeight - viewport.bottom);
 				pos.top -= adjustedTop;
 
-				$('#rr-popover .arrow').css({
+				$('#ng-popover .arrow').css({
 					top: adjustedTop + popoverHeight / 2
 				});
 			}					
@@ -67,19 +67,19 @@ module.provider('ngPopover', function () {
 				adjustedLeft = Math.min(pos.left, pos.left + popoverWidth - viewport.right);
 				pos.left -= adjustedLeft;
 
-				$('#rr-popover .arrow').css({
+				$('#ng-popover .arrow').css({
 					left: adjustedLeft + popoverWidth / 2
 				});
 			}					
 		}
 
 		if (windowWidth < 500 && maximize) {
-			var padding = popoverWidth - $('#rr-popover').width();
-			$('#rr-popover').width(windowWidth - padding);
+			var padding = popoverWidth - $('#ng-popover').width();
+			$('#ng-popover').width(windowWidth - padding);
 			pos.left = 0;
 
 			if (placement === 'bottom' || placement === 'top') {
-				$('#rr-popover .arrow').css({
+				$('#ng-popover .arrow').css({
 					left: elementPosition.left + elementWidth / 2
 				});				
 			}
@@ -93,7 +93,7 @@ module.provider('ngPopover', function () {
 	// Hide popovers when pressing esc
 	$('body').on('keyup', function(ev) {
 		if(ev.keyCode === 27) {
-			$('#rr-popover').fadeOut(200, function() {
+			$('#ng-popover').fadeOut(200, function() {
 				$(this).remove();
 				open = false;
 			});
@@ -103,7 +103,7 @@ module.provider('ngPopover', function () {
 	this.$get = function($rootScope, $templateCache, $compile) {
 		return {
 			close: function(data) {
-				$rootScope.$broadcast('rr-popover-hide', data);
+				$rootScope.$broadcast('ng-popover-hide', data);
 			}, 
 
 			open: function(element, scope, options) {
@@ -122,11 +122,11 @@ module.provider('ngPopover', function () {
 
 				$(element).on('click', function(evt) {
 					if (open) {
-						$('#rr-popover').fadeOut(200, function() {
+						$('#ng-popover').fadeOut(200, function() {
 							$(this).remove();
 						});
 					} else {
-						$('body').append("<div id='rr-popover' style='display:none'>" + 
+						$('body').append("<div id='ng-popover' style='display:none'>" + 
 											"<div class='arrow'></div>" + 
 											( title != '' ? "<div class='title'>" + title + "</div>" : "" ) + 
 											"<div class='content'>" + 
@@ -134,31 +134,36 @@ module.provider('ngPopover', function () {
 											"</div>" + 
 											( title != '' ? "<a href='' class='close-pop'>X</a>" : "" ) + 
 										"</div>");
-						$compile($('#rr-popover').contents())(scope);
+						$compile($('#ng-popover').contents())(scope);
 						scope.$apply();
 
 						var popoverPosition = calcPosition(element, placement, maximize);
 
 						$('.close-pop').on('click', function() {
-							$('#rr-popover').fadeOut(200, function() {
+							$('#ng-popover').fadeOut(200, function() {
 								$(this).remove();
 								open = false;
 							});
 						});
 
-						$('#rr-popover')
+						var placementClass = placement; 
+						if (placement === 'bottom' && title === '') {
+							placementClass = 'bottom-no-title';
+						}
+
+						$('#ng-popover')
 							.css({
 								left: popoverPosition.left, 
 								top: popoverPosition.top
 							})
-							.toggleClass(placement)
+							.toggleClass(placementClass)
 							.fadeIn(100);
 					}
 					open = !open;
 				});
 
-				scope.$on('rr-popover-hide', function() {
-					$('#rr-popover').fadeOut(100, function() {
+				scope.$on('ng-popover-hide', function() {
+					$('#ng-popover').fadeOut(100, function() {
 						$(this).remove();
 						open = false;
 					});
