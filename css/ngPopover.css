@@ -76,7 +76,7 @@
 #ng-popover.top .arrow:after {
   content: " ";
   bottom: 1px;
-  margin-left: -ng-popover-arrow-width;
+  margin-left: -10px;
   border-bottom-width: 0;
   border-top-color: #fff;
 }
