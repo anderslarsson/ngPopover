@@ -45,9 +45,25 @@ Popover optional title (and title bar with close button). If not present no titl
 
 Popover placement can be [ top | bottom | left | right]. Default value is ``bottom``.
 
+##### ``useparentwidth {Boolean}``
+
+When set to true, popover width will be set to same width as containing element. 
+
+##### ``anchorselector {String}``
+
+Popover will target arrow towards the dom element within the containing element with this selector (jquery).  
+
+##### ``maxwidth {Number}``
+
+Popover will get this max width.   
+
 ##### ``maximize {Boolean}``
 
 When set to true, popover width will be changed to width of small screens < 500px. 
+
+##### ``margin {Number}``
+
+Used together with maximize the popover will get a margin with this amount of pixels. 
 
 ```html
 <script type="text/ng-template" id="templateId">
@@ -67,6 +83,20 @@ ngPopover.open({
 ### ``.close()``
 
 Method closes the currently open popover.
+
+### ``.setup(options)``
+
+Setup global parameters for the popover.
+
+##### Options:
+
+##### ``smallScreenBreakpoint {Number}``
+
+Sets the breakpoint in pixels where the maximize option will kick in.
+
+##### ``maximizeMargin {Number}``
+
+Margin to add when showing popover maximized in width.
 
 ## Directive
 
