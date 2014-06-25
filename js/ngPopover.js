@@ -6,6 +6,16 @@ module.provider('ngPopover', function () {
 	var smallScreenBreakpoint = 500;
 	var maximizeMargin = 0;
 
+	$(document).on('click', function (e) {
+		if (open && !$('#ng-popover').is(e.target) && $('#ng-popover').has(e.target).length == 0) {
+			$('#ng-popover').fadeOut(200, function() {
+				$(this).remove();
+				open = false;
+			});
+		}			
+	});
+
+
 	var calcPosition = function(element, placement, maximize, useParentWidth, anchorSelector, maxWidth) {
 
 		var elementPosition = $(element).offset();
@@ -155,11 +165,7 @@ module.provider('ngPopover', function () {
 				}
 
 				$(element).on('click', function(evt) {
-					if (open) {
-						$('#ng-popover').fadeOut(200, function() {
-							$(this).remove();
-						});
-					} else {
+					if (!open) {
 						$('body').append("<div id='ng-popover' style='display:none'>" + 
 											"<div class='arrow'></div>" + 
 											( title != '' ? "<div class='title'>" + title + "</div>" : "" ) + 
@@ -191,9 +197,10 @@ module.provider('ngPopover', function () {
 								top: popoverPosition.top
 							})
 							.toggleClass(placementClass)
-							.fadeIn(100);
+							.fadeIn(100, function() {
+								open = true;
+							});
 					}
-					open = !open;
 				});
 
 				scope.$on('ng-popover-hide', function() {

@@ -9,18 +9,15 @@ gulp.task('styles', function() {
 });
 
 
-gulp.task('bump-minor', function() {
+var bumpIt = function(type) {
 	gulp.src('./bower.json')
-		.pipe(bump({type:'minor'}))
+		.pipe(bump({type: type}))
 		.pipe(gulp.dest('./'));
-});
+}
 
-
-gulp.task('bump-patch', function() {
-	gulp.src('./bower.json')
-		.pipe(bump({type:'patch'}))
-		.pipe(gulp.dest('./'));
-});
+gulp.task('bump-minor', bumpIt('minor'));
+gulp.task('bump-patch', bumpIt('patch'));
+gulp.task('bump-major', bumpIt('major'));
 
 
 gulp.task('default', ['styles']);
