@@ -15,9 +15,9 @@ var bumpIt = function(type) {
 		.pipe(gulp.dest('./'));
 }
 
-gulp.task('bump-minor', bumpIt('minor'));
-gulp.task('bump-patch', bumpIt('patch'));
-gulp.task('bump-major', bumpIt('major'));
+// gulp.task('bump-minor', bumpIt('minor'));
+// gulp.task('bump-patch', bumpIt('patch'));
+// gulp.task('bump-major', bumpIt('major'));
 
 
 gulp.task('default', ['styles']);

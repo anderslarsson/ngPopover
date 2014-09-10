@@ -166,6 +166,9 @@ module.provider('ngPopover', function () {
 
 				$(element).on('click', function(evt) {
 					if (!open) {
+
+						$rootScope.$broadcast('ng-popover-show', scope);
+						
 						$('body').append("<div id='ng-popover' style='display:none'>" + 
 											"<div class='arrow'></div>" + 
 											( title != '' ? "<div class='title'>" + title + "</div>" : "" ) + 
