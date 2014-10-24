@@ -23,6 +23,22 @@ app.controller('MainCtrl', function ($scope, ngPopover) {
 	};
 });
 ```
+## Directive
+
+By default ngPopover module is served with ``ngPopover`` directive which can be used as attribute for buttons, links, etc. All ``.open()`` options are available through tag attributes as well.
+
+Some button, for example, will look like:
+
+```html
+<button type="button"
+	ng-popover="templateId.html"
+	title="Popover title"
+	placement="right"
+	maximize="true"
+	Open popover text
+</button>
+```
+
 ## API
 
 ngPopover service provides easy to use API. Here is the list of accessible methods that you can use:
@@ -98,21 +114,6 @@ Sets the breakpoint in pixels where the maximize option will kick in.
 
 Margin to add when showing popover maximized in width.
 
-## Directive
-
-By default ngPopover module is served with ``ngPopover`` directive which can be used as attribute for buttons, links, etc. All ``.open()`` options are available through tag attributes as well.
-
-Some button, for example, will look like:
-
-```html
-<button type="button"
-	ng-popover="templateId.html"
-	title="Popover title"
-	placement="right"
-	maximize="true"
-	Open popover text
-</button>
-```
 ## Licence
 
 MIT Licensed
