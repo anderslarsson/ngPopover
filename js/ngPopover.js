@@ -8,11 +8,22 @@ module.provider('ngPopover', function () {
 
 	$(document).on('click', function (e) {
 		if (open && !$('#ng-popover').is(e.target) && $('#ng-popover').has(e.target).length == 0) {
-			$('#ng-popover').fadeOut(200, function() {
+
+			var fadeOutTime = 200;
+			var target = $(e.target);
+			if(target.attr('ng-popover')){
+				fadeOutTime = 0;
+			}
+			
+			$('#ng-popover').fadeOut(fadeOutTime, function() {
 				$(this).remove();
 				open = false;
+
+				if(target.attr('ng-popover')){
+					target.trigger('click');
+				}
 			});
-		}			
+		}
 	});
 
 
