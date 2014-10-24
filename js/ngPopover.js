@@ -11,7 +11,8 @@ module.provider('ngPopover', function () {
 
 			var fadeOutTime = 200;
 			var target = $(e.target);
-			if(target.attr('ng-popover')){
+
+			if(target.attr('ng-popover') || target.parents(['ng-popover'])){
 				fadeOutTime = 0;
 			}
 			
@@ -19,12 +20,13 @@ module.provider('ngPopover', function () {
 				$(this).remove();
 				open = false;
 
-				if(target.attr('ng-popover')){
+				if(target.attr('ng-popover') || target.parents(['ng-popover'])) {
 					target.trigger('click');
 				}
 			});
 		}
 	});
+
 
 
 	var calcPosition = function(element, placement, maximize, useParentWidth, anchorSelector, maxWidth) {
