@@ -7,6 +7,7 @@ module.provider('ngPopover', function () {
 	var maximizeMargin = 0;
 	var currentTarget;
 	var margin = 15;
+	
 
 	$(document).on('click', function (e) {
 		if (open && !$('#ng-popover').is(e.target) && $('#ng-popover').has(e.target).length == 0) {
