@@ -5,6 +5,8 @@ module.provider('ngPopover', function () {
 	var open = false;
 	var smallScreenBreakpoint = 500;
 	var maximizeMargin = 0;
+	var currentTarget;
+	var margin = 15;
 
 	$(document).on('click', function (e) {
 		if (open && !$('#ng-popover').is(e.target) && $('#ng-popover').has(e.target).length == 0) {
@@ -12,7 +14,7 @@ module.provider('ngPopover', function () {
 			var fadeOutTime = 200;
 			var target = $(e.target);
 
-			if(target.attr('ng-popover') || target.parents(['ng-popover'])){
+			if (target.attr('ng-popover') || target.parents(['ng-popover'])){
 				fadeOutTime = 0;
 			}
 			
@@ -20,7 +22,7 @@ module.provider('ngPopover', function () {
 				$(this).remove();
 				open = false;
 
-				if(target.attr('ng-popover') || target.parents(['ng-popover'])) {
+				if (currentTarget != e.target && (target.attr('ng-popover') || target.parents(['ng-popover']))) {
 					target.trigger('click');
 				}
 			});
@@ -78,7 +80,6 @@ module.provider('ngPopover', function () {
 				left: elementPosition.left + elementWidth/2 - popoverWidth / 2, 
 				top: elementPosition.top + elementHeight	
 			};			
-
 		}
 		if (placement === 'top') {
 			pos = {
@@ -103,10 +104,10 @@ module.provider('ngPopover', function () {
 			var adjustedLeft = 0;
 			if (pos.left + popoverWidth > viewport.right) {
 				adjustedLeft = Math.min(pos.left, pos.left + popoverWidth - viewport.right);
-				pos.left -= adjustedLeft;
+				pos.left -= (adjustedLeft + margin);
 
 				$('#ng-popover .arrow').css({
-					left: adjustedLeft + popoverWidth / 2
+					left: adjustedLeft + margin + popoverWidth / 2
 				});
 			}
 		}
@@ -134,7 +135,9 @@ module.provider('ngPopover', function () {
 			// $('html, body').animate({
 			// 	scrollTop: pos.top
 			// }, 0);
-		} 
+		} else {
+			$('#ng-popover').width(popoverWidth);			
+		}
 		return pos;
 	}
 
@@ -179,6 +182,8 @@ module.provider('ngPopover', function () {
 
 				$(element).on('click', function(evt) {
 					if (!open) {
+
+						currentTarget = evt.target;
 
 						$rootScope.$broadcast('ng-popover-show', scope);
 						
