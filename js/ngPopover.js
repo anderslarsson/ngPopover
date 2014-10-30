@@ -13,7 +13,7 @@ module.provider('ngPopover', function () {
 	$(document).on('click', function (e) {
 		if (open) {
 			var inOverlay = overlayClasses.some(function(cls) {
-				return $(cls).has(e.target).length == 0;
+				return $(cls).has(e.target).length != 0;
 			});
 			if (!$('#ng-popover').is(e.target) && $('#ng-popover').has(e.target).length == 0 && !inOverlay) {
 
