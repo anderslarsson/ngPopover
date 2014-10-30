@@ -7,26 +7,32 @@ module.provider('ngPopover', function () {
 	var maximizeMargin = 0;
 	var currentTarget;
 	var margin = 15;
+	var overlayClasses = [];
 	
 
 	$(document).on('click', function (e) {
-		if (open && !$('#ng-popover').is(e.target) && $('#ng-popover').has(e.target).length == 0) {
-
-			var fadeOutTime = 200;
-			var target = $(e.target);
-
-			if (target.attr('ng-popover') || target.parents(['ng-popover'])){
-				fadeOutTime = 0;
-			}
-			
-			$('#ng-popover').fadeOut(fadeOutTime, function() {
-				$(this).remove();
-				open = false;
-
-				if (currentTarget != e.target && (target.attr('ng-popover') || target.parents(['ng-popover']))) {
-					target.trigger('click');
-				}
+		if (open) {
+			var inOverlay = overlayClasses.some(function(cls) {
+				return $(cls).has(e.target).length == 0;
 			});
+			if (!$('#ng-popover').is(e.target) && $('#ng-popover').has(e.target).length == 0 && !inOverlay) {
+
+				var fadeOutTime = 200;
+				var target = $(e.target);
+
+				if (target.attr('ng-popover') || target.parents(['ng-popover'])){
+					fadeOutTime = 0;
+				}
+				
+				$('#ng-popover').fadeOut(fadeOutTime, function() {
+					$(this).remove();
+					open = false;
+
+					if (currentTarget != e.target && (target.attr('ng-popover') || target.parents(['ng-popover']))) {
+						target.trigger('click');
+					}
+				});
+			}
 		}
 	});
 
@@ -158,6 +164,7 @@ module.provider('ngPopover', function () {
 			setup: function(options) {
 				smallScreenBreakpoint = options.smallScreenBreakpoint || 500;
 				maximizeMargin = options.maximizeMargin || 0;
+				overlayClasses = options.overlayClasses || [];
 			}, 
 
 			close: function(data) {

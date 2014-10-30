@@ -81,6 +81,10 @@ When set to true, popover width will be changed to width of small screens < 500p
 
 Used together with maximize the popover will get a margin with this amount of pixels. 
 
+##### ``overlayClasses [string]``
+
+Add a list of classes which will be overlays to popovers and clicks in them should not close the popover. 
+
 ```html
 <script type="text/ng-template" id="templateId">
 	<h1>Template heading</h1>
