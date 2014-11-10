@@ -6,7 +6,7 @@ module.provider('ngPopover', function () {
 	var smallScreenBreakpoint = 500;
 	var maximizeMargin = 0;
 	var currentTarget;
-	var margin = 15;
+	var margin = 0;
 	var overlayClasses = [];
 	
 
@@ -164,6 +164,7 @@ module.provider('ngPopover', function () {
 			setup: function(options) {
 				smallScreenBreakpoint = options.smallScreenBreakpoint || 500;
 				maximizeMargin = options.maximizeMargin || 0;
+				margin = options.margin || 0;
 				overlayClasses = options.overlayClasses || [];
 			}, 
 
