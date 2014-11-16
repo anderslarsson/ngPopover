@@ -35,6 +35,7 @@ Some button, for example, will look like:
 	title="Popover title"
 	placement="right"
 	maximize="true"
+	init='initPopover()'
 	Open popover text
 </button>
 ```
@@ -80,6 +81,10 @@ When set to true, popover width will be changed to width of small screens < 500p
 ##### ``margin {Number}``
 
 Used together with maximize the popover will get a margin with this amount of pixels. 
+
+##### ``init {expression}``
+If present, ngPopover will $eval the expression before the ngPopover is renedered. Initalization can take place and update e.g the scope. 
+If async task needs to be done, return a $q promise and popover will be rendered when resolved. 
 
 ##### ``overlayClasses [string]``
 

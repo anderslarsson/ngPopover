@@ -6,7 +6,7 @@ module.provider('ngPopover', function () {
 	var smallScreenBreakpoint = 500;
 	var maximizeMargin = 0;
 	var currentTarget;
-	var margin = 0;
+	var margin = 15;
 	var overlayClasses = [];
 	
 
@@ -158,13 +158,12 @@ module.provider('ngPopover', function () {
 		}
 	});
 
-	this.$get = function($rootScope, $templateCache, $compile) {
+	this.$get = ['$rootScope', '$templateCache', '$compile', function($rootScope, $templateCache, $compile) {
 		return {
 
 			setup: function(options) {
 				smallScreenBreakpoint = options.smallScreenBreakpoint || 500;
 				maximizeMargin = options.maximizeMargin || 0;
-				margin = options.margin || 0;
 				overlayClasses = options.overlayClasses || [];
 			}, 
 
@@ -189,47 +188,64 @@ module.provider('ngPopover', function () {
 					scope.rrData = options.data;
 				}
 
+				var setupClick = function() {
+					$('body').append("<div id='ng-popover' style='display:none'>" + 
+										"<div class='arrow'></div>" + 
+										( title != '' ? "<div class='title'>" + title + "</div>" : "" ) + 
+										"<div class='content'>" + 
+											template +
+										"</div>" + 
+										( title != '' ? "<a href='' class='close-pop'>X</a>" : "" ) + 
+									"</div>");
+					$compile($('#ng-popover').contents())(scope);
+					scope.$apply();
+
+					var popoverPosition = calcPosition(element, placement, maximize, useParentWidth, anchorSelector, maxWidth);
+
+					$('.close-pop').on('click', function() {
+						$('#ng-popover').fadeOut(200, function() {
+							$(this).remove();
+							open = false;
+						});
+					});
+
+					var placementClass = placement; 
+					if (placement === 'bottom' && title === '') {
+						placementClass = 'bottom-no-title';
+					}
+
+					$('#ng-popover')
+						.css({
+							left: popoverPosition.left, 
+							top: popoverPosition.top
+						})
+						.toggleClass(placementClass)
+						.fadeIn(100, function() {
+							open = true;
+						});
+
+				}
+
 				$(element).on('click', function(evt) {
 					if (!open) {
 
 						currentTarget = evt.target;
 
 						$rootScope.$broadcast('ng-popover-show', scope);
-						
-						$('body').append("<div id='ng-popover' style='display:none'>" + 
-											"<div class='arrow'></div>" + 
-											( title != '' ? "<div class='title'>" + title + "</div>" : "" ) + 
-											"<div class='content'>" + 
-												template +
-											"</div>" + 
-											( title != '' ? "<a href='' class='close-pop'>X</a>" : "" ) + 
-										"</div>");
-						$compile($('#ng-popover').contents())(scope);
-						scope.$apply();
+							
+						if (options.init) {
+							var promise = scope.$eval(options.init);
+							if (typeof promise == 'object') {							
+								promise.then(function() {
+									setTimeout(setupClick, 0);
+								});
+							} else {
+								setupClick();
+							}
 
-						var popoverPosition = calcPosition(element, placement, maximize, useParentWidth, anchorSelector, maxWidth);
-
-						$('.close-pop').on('click', function() {
-							$('#ng-popover').fadeOut(200, function() {
-								$(this).remove();
-								open = false;
-							});
-						});
-
-						var placementClass = placement; 
-						if (placement === 'bottom' && title === '') {
-							placementClass = 'bottom-no-title';
+						} else {
+							setupClick();
 						}
-
-						$('#ng-popover')
-							.css({
-								left: popoverPosition.left, 
-								top: popoverPosition.top
-							})
-							.toggleClass(placementClass)
-							.fadeIn(100, function() {
-								open = true;
-							});
 					}
 				});
 
@@ -242,11 +258,11 @@ module.provider('ngPopover', function () {
 
 			}
 		}
-	}
+	}]
 });
 
 
-module.directive('ngPopover', function($templateCache, $compile, ngPopover) {
+module.directive('ngPopover', ['ngPopover', function(ngPopover) {
 
 	return {
 		restrict: 'A', 
@@ -255,4 +271,4 @@ module.directive('ngPopover', function($templateCache, $compile, ngPopover) {
 		}
 	}
 
-});
+}]);
