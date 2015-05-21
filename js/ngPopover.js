@@ -1,6 +1,6 @@
-var module = angular.module('ngPopover', []);
+angular.module('ngPopover', [])
 
-module.provider('ngPopover', function () {
+.provider('ngPopover', function () {
 
 	var open = false;
 	var smallScreenBreakpoint = 500;
@@ -259,10 +259,9 @@ module.provider('ngPopover', function () {
 			}
 		}
 	}]
-});
+})
 
-
-module.directive('ngPopover', ['ngPopover', function(ngPopover) {
+.directive('ngPopover', ['ngPopover', function(ngPopover) {
 
 	return {
 		restrict: 'A', 

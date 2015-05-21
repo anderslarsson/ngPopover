@@ -12,6 +12,7 @@
   ],
   "main": [
     "js/ngPopover.js",
+    "js/ngPopover.min.js",
     "css/ngPopover.css"
   ],
   "license": "MIT",
