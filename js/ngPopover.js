@@ -107,6 +107,14 @@ module.provider('ngPopover', function () {
 					left: adjustedLeft + popoverWidth / 2
 				});
 			}
+			else if(pos.left < viewport.left) {
+				var adjustedLeft = pos.left;
+				pos.left = viewport.left + margin;
+
+				$('#ng-popover .arrow').css({
+					left: adjustedLeft - margin + popoverWidth / 2
+				});
+			}
 		}
 
 		if (anchorSelector) {
